@@ -40,40 +40,11 @@ Modo Escuro e Flexbox: Pensei no avaliador que vai testar isso à noite! Criei u
 Segurança Básica: Criei um middleware no backend não apenas para fazer logs bonitos no terminal, mas para injetar cabeçalhos defensivos na resposta (X-Frame-Options e X-Content-Type-Options).
 
 ## Documentação Visual (UML)
-Abaixo estão os diagramas representando o comportamento do sistema. O GitHub renderiza esses diagramas automaticamente!
+Abaixo estão os diagramas representando o comportamento do sistema. 
 
-1. User Flow (Como o usuário usa o sistema)
+### 1. User Flow
+![User Flow](docs/user-flow.png)
 
-```mermaid
-stateDiagram-v2
-    [*] --> Visualizar_Board: Acessa a aplicação
-    Visualizar_Board --> Adicionar_Tarefa: Clica em "+ Adicionar"
-    Adicionar_Tarefa --> Visualizar_Board: Preenche título e salva
-    
-    Visualizar_Board --> Editar_Tarefa: Clica no ícone de Lápis
-    Editar_Tarefa --> Visualizar_Board: Modifica e salva
-    
-    Visualizar_Board --> Mover_Tarefa: Segura e arrasta o card (Drag & Drop)
-    Mover_Tarefa --> Visualizar_Board: Solta na nova coluna
-    
-    Visualizar_Board --> Excluir_Tarefa: Clica no ícone de Lixeira
-    Excluir_Tarefa --> Visualizar_Board: Confirma a exclusão
+### 2. Data Flow
+![Data Flow](docs/data-flow.png)
 
-2. Data Flow (Como os dados viajam por baixo dos panos) - Bônus
-
-sequenceDiagram
-    participant U as Usuário
-    participant F as Frontend (React)
-    participant B as Backend (Go API)
-    participant J as tasks.json
-
-    U->>F: Interage com a tela (ex: mover tarefa)
-    F->>B: Requisição HTTP (PUT /tasks/{id})
-    activate B
-    B->>B: Lock no Mutex (Segurança de concorrência)
-    B->>J: Atualiza o arquivo
-    J-->>B: Confirmação de gravação
-    B->>B: Unlock no Mutex
-    B-->>F: Retorna JSON (Status 200 OK)
-    deactivate B
-    F-->>U: Atualiza a interface visual
