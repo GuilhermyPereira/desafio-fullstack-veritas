@@ -39,6 +39,18 @@ Modo Escuro e Flexbox: Pensei no avaliador que vai testar isso à noite! Criei u
 
 Segurança Básica: Criei um middleware no backend não apenas para fazer logs bonitos no terminal, mas para injetar cabeçalhos defensivos na resposta (X-Frame-Options e X-Content-Type-Options).
 
+## Limitações Conhecidas e Melhorias Futuras
+
+Fui bem sincero comigo mesmo ao revisar o projeto e percebi alguns pontos que valem a pena deixar registrados, tanto por transparência quanto porque mostram que entendo o motivo de cada limitação.
+
+**Ordenação dentro da coluna:** o backend guarda as tarefas em um `map[string]Task` no Go, e mapas não garantem ordem determinística quando são percorridos. Isso significa que mover uma tarefa entre colunas funciona perfeitamente e persiste o novo status, mas a ordem visual que você define ao arrastar as tarefas dentro da mesma coluna não é salva. Se você recarregar a página, a ordem pode aparecer diferente. Uma melhoria futura seria adicionar um campo `position` na struct `Task` para guardar essa sequência.
+
+**URL da API fixa:** o frontend aponta direto para `http://localhost:8080/tasks`. Funciona bem no ambiente local e via Docker Compose, mas numa próxima versão eu usaria uma variável de ambiente (`VITE_API_URL`) para deixar isso mais flexível em outros ambientes.
+
+**Sem autenticação:** a API está aberta, com CORS liberado para qualquer origem. Faz sentido para o escopo deste desafio, mas num cenário de produção real eu implementaria autenticação e autorização antes de qualquer coisa.
+
+**Geração de ID:** optei por usar timestamp (`UnixNano`) em vez de UUID. Funciona bem na prática e simplifica o código, mas um UUID seria uma escolha mais robusta para evitar colisões teóricas em cenários de alta concorrência.
+
 ## Documentação Visual (UML)
 Abaixo estão os diagramas representando o comportamento do sistema. 
 
