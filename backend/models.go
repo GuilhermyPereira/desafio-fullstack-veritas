@@ -18,7 +18,7 @@ type Task struct {
 var (
 	tasks      = make(map[string]Task)
 	tasksMutex sync.Mutex
-	dataFile   = "tasks.json"
+	dataFile   = "data/tasks.json"
 )
 
 // loadTasks lê o arquivo JSON ao iniciar o servidor
