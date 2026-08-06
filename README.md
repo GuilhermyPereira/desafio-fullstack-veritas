@@ -43,8 +43,8 @@ Segurança Básica: Criei um middleware no backend não apenas para fazer logs b
 Abaixo estão os diagramas representando o comportamento do sistema. 
 
 ### 1. User Flow
-![User Flow](docs/user-flow.png)
+![User Flow](docs/UserFlow.png)
 
 ### 2. Data Flow
-![Data Flow](docs/data-flow.png)
+![Data Flow](docs/DataFlow.png)
 
