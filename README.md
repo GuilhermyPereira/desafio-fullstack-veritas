@@ -44,6 +44,7 @@ Abaixo estão os diagramas representando o comportamento do sistema. O GitHub re
 
 1. User Flow (Como o usuário usa o sistema)
 
+```mermaid
 stateDiagram-v2
     [*] --> Visualizar_Board: Acessa a aplicação
     Visualizar_Board --> Adicionar_Tarefa: Clica em "+ Adicionar"
