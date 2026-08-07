@@ -45,14 +45,14 @@ func securityAndLogMiddleware(next http.Handler) http.Handler {
 }
 
 func main() {
-	// Requisito bônus: carrega tarefas do JSON ao iniciar[cite: 1]
+	// Requisito bônus: carrega tarefas do JSON ao iniciar
 	loadTasks()
 
 	mux := http.NewServeMux()
 	mux.HandleFunc("/tasks", tasksHandler)
 	mux.HandleFunc("/tasks/", tasksHandler)
 
-	// Requisito obrigatório: Configura o CORS para o Frontend[cite: 1]
+	// Requisito obrigatório: Configura o CORS para o Frontend
 	c := cors.New(cors.Options{
 		AllowedOrigins:   []string{"*"},
 		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE"},
